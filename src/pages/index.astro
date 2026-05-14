@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout title="我的博客">
+  <section class="hero">
+    <h1>欢迎来到我的博客</h1>
+    <p class="subtitle">记录思考，分享成长</p>
+  </section>
+
+  <section class="recent-posts">
+    <h2>最新文章</h2>
+    {posts.slice(0, 5).map((post) => (
+      <PostCard
+        title={post.data.title}
+        description={post.data.description}
+        date={post.data.date}
+        tags={post.data.tags}
+        slug={post.slug}
+      />
+    ))}
+  </section>
+
+  {posts.length === 0 && (
+    <p class="empty">还没有文章，开始写第一篇吧！</p>
+  )}
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    color: var(--color-muted);
+    font-size: 1.15rem;
+    margin-top: 0.5rem;
+  }
+
+  .recent-posts {
+    margin-top: 1rem;
+  }
+
+  .recent-posts h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-secondary);
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--color-muted);
+    padding: 2rem 0;
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>

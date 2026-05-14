@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于 - 我的博客">
+  <article class="about">
+    <h1>关于我</h1>
+    <p>在这里写一段关于你自己的介绍。</p>
+    <p>比如你的职业、兴趣、联系方式等等。</p>
+
+    <h2>联系方式</h2>
+    <ul>
+      <li>GitHub: <a href="#">你的 GitHub</a></li>
+      <li>邮箱: your@email.com</li>
+      <li>Twitter: <a href="#">@你的账号</a></li>
+    </ul>
+  </article>
+</BaseLayout>
+
+<style>
+  .about {
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    margin-top: 2rem;
+  }
+
+  p {
+    color: var(--color-muted);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    padding: 0.3rem 0;
+    color: var(--color-muted);
+  }
+</style>
