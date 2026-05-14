@@ -12,7 +12,7 @@ const safeDate = date ? new Date(date) : new Date();
 ---
 
 <article class="post-card">
-  <a href={`/blog/${slug}`}>
+  <a href={import.meta.env.BASE_URL + 'blog/' + slug}>
     <h2 class="post-title">{title}</h2>
   </a>
   <p class="post-desc">{description}</p>

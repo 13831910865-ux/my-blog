@@ -34,7 +34,7 @@ const safeDate = date ? new Date(date) : new Date();
     </div>
 
     <footer class="post-footer">
-      <a href="/blog">← 返回文章列表</a>
+      <a href={import.meta.env.BASE_URL + 'blog'}>← 返回文章列表</a>
     </footer>
   </article>
 </BaseLayout>
