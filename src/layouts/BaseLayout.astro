@@ -20,6 +20,13 @@ const { title, description = '我的个人博客' } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet" />
     <title>{title}</title>
+    <script is:inline>
+      // 在页面渲染前执行，防止闪烁
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -29,6 +36,9 @@ const { title, description = '我的个人博客' } = Astro.props;
           <a href={import.meta.env.BASE_URL}>首页</a>
           <a href={import.meta.env.BASE_URL + 'blog'}>文章</a>
           <a href={import.meta.env.BASE_URL + 'about'}>关于</a>
+          <button id="theme-toggle" class="theme-btn" aria-label="切换主题">
+            <span class="theme-icon">☀️</span>
+          </button>
         </div>
       </nav>
     </header>
@@ -40,6 +50,21 @@ const { title, description = '我的个人博客' } = Astro.props;
     <footer class="site-footer">
       <p>&copy; {new Date().getFullYear()} 我的博客 · 使用 <a href="https://astro.build" target="_blank">Astro</a> 构建</p>
     </footer>
+
+    <script is:inline>
+      const btn = document.getElementById('theme-toggle');
+      const icon = btn.querySelector('.theme-icon');
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '🌙' : '☀️';
+
+      btn.addEventListener('click', () => {
+        const html = document.documentElement;
+        html.classList.toggle('dark');
+        const nowDark = html.classList.contains('dark');
+        icon.textContent = nowDark ? '🌙' : '☀️';
+        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      });
+    </script>
   </body>
 </html>
 
@@ -75,6 +100,7 @@ const { title, description = '我的个人博客' } = Astro.props;
 
   .nav-links {
     display: flex;
+    align-items: center;
     gap: 1.5rem;
   }
 
@@ -85,6 +111,21 @@ const { title, description = '我的个人博客' } = Astro.props;
 
   .nav-links a:hover {
     color: var(--color-primary);
+  }
+
+  .theme-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    transition: background 0.2s;
+  }
+
+  .theme-btn:hover {
+    background: var(--color-border);
   }
 
   .container {
