@@ -1,11 +1,11 @@
 :root {
-  --color-bg: skyblue;
-  --color-text: #1a1a2e;
-  --color-primary: #2563eb;
+  --color-bg: rgb(107, 189, 222);
+  --color-text: #5dc17ae5;
+  --color-primary: #104ed4;
   --color-secondary: #3b82f6;
-  --color-muted: #6b7280;
-  --color-border: #e5e7eb;
-  --color-card-bg: #f8f9fa;
+  --color-muted: #de6e88;
+  --color-border: #dcdfe7;
+  --color-card-bg: #36628f;
   --font-body: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-heading: 'Noto Serif SC', Georgia, serif;
   --max-width: 720px;
